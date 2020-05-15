@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditTermDialog</class>
+ <widget class="QDialog" name="EditTermDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>738</width>
+    <height>606</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="3" rowspan="2">
+      <widget class="QLabel" name="TermDescriptionLabel">
+       <property name="text">
+        <string>Term Description</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4" colspan="2">
+      <widget class="QLabel" name="TermCategoryLabel">
+       <property name="text">
+        <string>Term Category</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4" rowspan="2" colspan="2">
+      <widget class="QListWidget" name="CategoryListWidget"/>
+     </item>
+     <item row="2" column="0" colspan="3">
+      <widget class="QLineEdit" name="TermNameLineEdit"/>
+     </item>
+     <item row="2" column="3">
+      <widget class="QTextEdit" name="TermDescriptionTextEdit"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="DeleteTermsButton">
+       <property name="text">
+        <string>Delete Terms</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="AddTermButton">
+       <property name="text">
+        <string>Add Term</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="EditCategoriesButton">
+       <property name="text">
+        <string>Edit Categories</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QPushButton" name="ClearSelectionButton">
+       <property name="text">
+        <string>Clear Selection</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="5">
+      <widget class="QPushButton" name="SaveButton">
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="6">
+      <widget class="QTableWidget" name="TermsToEditTableWidget">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
+       <property name="columnCount">
+        <number>4</number>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <column/>
+       <column/>
+       <column/>
+       <column/>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="2">
+      <widget class="QPushButton" name="DoneEditingButton">
+       <property name="text">
+        <string>Done Editing</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QPushButton" name="CancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" rowspan="2" colspan="3">
+      <widget class="QLabel" name="TermNameLabel">
+       <property name="text">
+        <string>Term Name</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
