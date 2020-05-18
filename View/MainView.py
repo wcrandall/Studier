@@ -8,17 +8,22 @@ import os.path
 from View.HelpView import HelpView
 from PyQt5.Qt import Qt
 from View.EditAndAddTermsView import EditAndAddTermsView
+from PyQt5 import QtGui
 
 
 
 class MainView(QMainWindow):
-    ui_path = os.path.dirname(os.path.abspath(__file__))
-    ui_path = os.path.join(ui_path, "studier.ui")
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    ui_path = os.path.join(file_path, "studier.ui")
 
     def __init__(self):
         try:
             super(MainView, self).__init__()
             uic.loadUi(self.ui_path, self)
+
+
+
+            # initializing controller
             self.controller = Controller()
 
             # creating database and database tables if they don't exist
@@ -36,10 +41,7 @@ class MainView(QMainWindow):
             # Opens a quiz dialog for the currently selected category
             self.TestButton.clicked.connect(self.test_button_clicked)
 
-            # When the add category option is selected from the top-left menu
-            # a dialog to select a file is opened
-            # once the file is selected the categories inside are added to database
-            self.actionCategories_with_text_file.triggered.connect(self.action_category_with_text_file_clicked)
+
 
             # upon the click of the help option in the top-left menu
             # a dialog with information on the application is shown
@@ -67,22 +69,7 @@ class MainView(QMainWindow):
         helpView = HelpView()
         helpView.exec_()
 
-    # When the menu bar item add category with text file is clicked
-    # this method will split the file into categories to be put into the database
-    # by commas and/or newlines
-    def action_category_with_text_file_clicked(self):
-        try:
-            file_name = self.get_file()
-            if file_name is not None:
-                with open(file_name, "r") as file:
-                    for line in file:
-                        current_line = line.split(",")
-                        for category in current_line:
-                            category = category.title()
-                            self.controller.insert_category(category.strip())
-                self.load_term_categories_list_widget()
-        except Exception as e:
-            print(str(e))
+
 
     # opens the dialog for editing terms
     def edit_term_button_clicked(self):
@@ -105,19 +92,7 @@ class MainView(QMainWindow):
 
 
 
-    # opens a dialog that allows the user to chose a file
-    # it than returns the file directory
-    def get_file(self):
-        try:
-            dlg = QFileDialog()
-            dlg.setFileMode(QFileDialog.AnyFile)
-            dlg.setNameFilter("Text files (*.txt)")
-            dlg.exec_()
-            file_names = dlg.selectedFiles()
-        except Exception as e:
-            print(str(e))
-        if len(file_names) != 0:
-            return file_names[0]
+
 
     # brings up the test dialog and starts test on terms in
     # the category selected

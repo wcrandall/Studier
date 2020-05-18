@@ -2,16 +2,19 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QMessageBox
 from Controller.TestViewController import TestViewController
 import os.path
-
+from PyQt5.Qt import Qt
 
 class TestView(QDialog):
-    ui_path = os.path.dirname(os.path.abspath(__file__))
-    ui_path = os.path.join(ui_path, "TermQuiz.ui")
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    ui_path = os.path.join(file_path, "TermQuiz.ui")
 
     def __init__(self, category, terms_in_category):
         try:
             super(TestView, self).__init__()
+            # taking out Question mark button by x button
+            self.setWindowFlags(self.windowFlags() & Qt.WindowContextHelpButtonHint)
             uic.loadUi(self.ui_path, self)
+
 
             # setting up game and ui
             self.test_view_controller = TestViewController(category, terms_in_category)

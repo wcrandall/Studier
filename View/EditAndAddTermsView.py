@@ -7,10 +7,11 @@ from Controller.EditAndAddTermsController import EditAndAddTermsController
 from View.EditCategoriesForTermView import EditCategoriesForTermView
 from PyQt5.Qt import Qt
 
+
 class EditAndAddTermsView(QDialog):
     # setting the path of the ui
-    ui_path = os.path.dirname(os.path.abspath(__file__))
-    ui_path = os.path.join(ui_path, "EditAndAddTermsDialog.ui")
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    ui_path = os.path.join(file_path, "EditAndAddTermsDialog.ui")
     ''' when the user edits a term name or description the prior must be saved 
     in order to check if the user actually edited the name or description '''
     before_cell_is_edited = ""
@@ -18,12 +19,18 @@ class EditAndAddTermsView(QDialog):
     def __init__(self, category="All Terms"):
         self.category = category
         super(EditAndAddTermsView, self).__init__()
+
+        # taking out Question mark button by x button
+        self.setWindowFlags(self.windowFlags() & Qt.WindowContextHelpButtonHint)
+
         uic.loadUi(self.ui_path, self)
 
         # if anything has been changed the database must be comitted to before categories can be edited
         # also used to check if data must be committed when done is clicked
         # working with flags
         self.must_be_saved = False
+        self.SaveButton.setText("Saved")
+        self.SaveButton.setStyleSheet("color:green")
 
         # initializing controller for this ui
         self.edit_and_add_terms_controller = EditAndAddTermsController()
@@ -42,12 +49,12 @@ class EditAndAddTermsView(QDialog):
         # setting up category list widget
         categories = self.edit_and_add_terms_controller.get_all_categories()
         for category in categories:
-            if category != "All Terms":
-                category_list_widget_item = QListWidgetItem(category)
-                category_list_widget_item.setTextAlignment(Qt.AlignCenter)
-                self.CategoryListWidget.addItem(category_list_widget_item)
-                if category == self.category:
-                    self.CategoryListWidget.setCurrentItem(category_list_widget_item)
+                if category != "All Terms":
+                    category_list_widget_item = QListWidgetItem(category)
+                    category_list_widget_item.setTextAlignment(Qt.AlignCenter)
+                    self.CategoryListWidget.addItem(category_list_widget_item)
+                    if category == self.category:
+                        self.CategoryListWidget.setCurrentItem(category_list_widget_item)
 
         # allowing multiple terms to be selected at once
         self.CategoryListWidget.setSelectionMode(QListWidget.MultiSelection)
@@ -76,6 +83,38 @@ class EditAndAddTermsView(QDialog):
         # linking clear button to a function that will clear term inputs
         self.ClearSelectionButton.clicked.connect(self.clear_selection_button_clicked)
 
+        self.CategoryListWidget.itemSelectionChanged.connect(self.category_list_widget_item_selection_changed)
+
+
+    def category_list_widget_item_selection_changed(self):
+        # deleting the rows from Terms Table Widget
+        while self.TermsToEditTableWidget.rowCount() != 0:
+            self.TermsToEditTableWidget.removeRow(0)
+
+        # getting all categories selected in category list widget
+        selected_category_list_widget_items = self.CategoryListWidget.selectedItems()
+        categories = []
+
+
+        # if no categories are selected default to All Terms
+        if len(selected_category_list_widget_items) != 0:
+            for selected_category_list_widget_item in selected_category_list_widget_items:
+                categories.append(selected_category_list_widget_item.text())
+        else:
+            categories.append("All Terms")
+
+        # getting all terms in selectd categories - repeats
+        all_selected_items_terms = self.edit_and_add_terms_controller.get_all_unique_terms_in_categories(categories)
+
+        # adding terms to the terms table widget
+        for term in all_selected_items_terms:
+                    categories_for_term = self.edit_and_add_terms_controller.get_all_of_a_terms_categories(term.get_term_id())
+
+                    self.add_row_to_term_table_widget(
+                                                     term.get_term_id(), term.get_term_name(),
+                                                     term.get_term_definition(), categories_for_term
+                                                     )
+
     # clears the term inputs
     def clear_selection_button_clicked(self):
         self.TermNameLineEdit.clear()
@@ -87,6 +126,8 @@ class EditAndAddTermsView(QDialog):
     def save_button_clicked(self):
         self.edit_and_add_terms_controller.commit_to_database()
         self.must_be_saved = False
+        self.SaveButton.setText("Saved")
+        self.SaveButton.setStyleSheet("color:green")
 
     def terms_to_edit_table_widget_double_clicked(self, item):
         ''' gets the text of the table widget cell before it is edited by user '''
@@ -128,6 +169,8 @@ class EditAndAddTermsView(QDialog):
                     # since there is now changed data in the table, the transaction must be committed before categories are edited
                     # or the transaction must be rolledback if the X button is clicked
                     self.must_be_saved = True
+                    self.SaveButton.setText("Save")
+                    self.SaveButton.setStyleSheet("color:red")
         except Exception as e:
             print(str(e))
 
@@ -166,6 +209,8 @@ class EditAndAddTermsView(QDialog):
 
             # the data is changed so it must committed before categories are edited or rolledback upon X
             self.must_be_saved = True
+            self.SaveButton.setText("Save")
+            self.SaveButton.setStyleSheet("color:red")
 
         except Exception as e:
             print(str(e))
@@ -261,6 +306,8 @@ class EditAndAddTermsView(QDialog):
                     '''the database must be committed too before categories 
                     can be edited or the database must be rolled back if Xed'''
                     self.must_be_saved = True
+                    self.SaveButton.setText("Save")
+                    self.SaveButton.setStyleSheet("color:red")
                     # get the term id of the newly added term
                     term_id = self.edit_and_add_terms_controller.get_term_id_with_name_and_description(term_name,
                                                                                                        term_description)

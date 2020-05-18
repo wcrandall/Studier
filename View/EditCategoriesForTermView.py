@@ -4,11 +4,10 @@ from PyQt5 import uic
 from PyQt5.Qt import Qt
 from Controller.EditAndAddTermsController import EditAndAddTermsController
 
-
 class EditCategoriesForTermView(QDialog):
     # setting up the path of the ui file
-    ui_path = os.path.dirname(os.path.abspath(__file__))
-    ui_path = os.path.join(ui_path, "EditCategoriesForTerm.ui")
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    ui_path = os.path.join(file_path, "EditCategoriesForTerm.ui")
 
     def __init__(self, term_editing_categories_for):
         # getting the controller ready
@@ -17,6 +16,9 @@ class EditCategoriesForTermView(QDialog):
         self.edit_and_add_terms_controller.connect_to_database()
 
         super(EditCategoriesForTermView, self).__init__()
+        # taking out Question mark button by x button
+        self.setWindowFlags(self.windowFlags() & Qt.WindowContextHelpButtonHint)
+
         uic.loadUi(self.ui_path, self)
 
         self.term_editing_categories_for = term_editing_categories_for

@@ -48,6 +48,53 @@ class EditAndAddTermsController:
     def get_all_of_a_terms_categories(self, term_id):
         return self.database.get_all_of_a_terms_categories(term_id)
 
+    def get_all_unique_terms_in_categories(self, categories):
+
+        all_terms = []
+        # getting all terms in categories given
+        for category in categories:
+            all_terms.append(self.get_all_terms_in_category(category))
+
+        all_terms_single_list = []
+
+        # turning the list of lists into a single list
+        for all_term in all_terms:
+            for term in all_term:
+                all_terms_single_list.append(term)
+
+        # making a copy of the single list
+        # the copy will be edited
+        # the original will be used to make sure all terms are checked
+        clone = all_terms_single_list.copy()
+
+        # deleting extra occurrences of terms out of clone
+        for i in range(0, len(all_terms_single_list)):
+            occurrences = self.count_occurrences_of_term_in_term_list(all_terms_single_list[i], clone)
+            if occurrences > 1:
+                for j in range(occurrences, 1, -1):
+                    clone = self.delete_one_occurrence_of_term(all_terms_single_list[i], clone)
+
+
+
+
+        return clone
+
+    # deletes one occurrence of a term
+    def delete_one_occurrence_of_term(self, term_deleting, term_list):
+        for k in range(0, len(term_list)):
+            if term_list[k].get_term_id() == term_deleting.get_term_id():
+                term_list.pop(k)
+                return term_list
+
+    # counts how many times a term is in a list
+    def count_occurrences_of_term_in_term_list(self, term_counting_occurrences_of, term_list):
+        occurrences = 0
+        for term in term_list:
+            if term.get_term_id() == term_counting_occurrences_of.get_term_id():
+                occurrences += 1
+        return occurrences
+
+
     def get_all_categories(self):
         results = self.database.get_all_categories()
         return results

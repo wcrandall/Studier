@@ -10,17 +10,20 @@ from PyQt5.Qt import Qt
 
 
 
-
 class EditCategoryView(QDialog):
     # setting up the ui path
-    ui_path = os.path.dirname(os.path.abspath(__file__))
-    ui_path = os.path.join(ui_path, "EditCategory.ui")
+    file_path = os.path.dirname(os.path.abspath(__file__))
+
+    ui_path = os.path.join(file_path, "EditCategory.ui")
 
     # used to ensure the edited cell data is not the same as original
     before_cell_is_edited = ""
 
     def __init__(self):
         super(EditCategoryView, self).__init__()
+        # taking out Question mark button by x button
+        self.setWindowFlags(self.windowFlags() & Qt.WindowContextHelpButtonHint)
+
         uic.loadUi(self.ui_path, self)
 
         # setting up controller and connecting to the database
