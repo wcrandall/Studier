@@ -1,4 +1,6 @@
-<img src="StudierLogo.png" title="StudierLogo" alt="StudierLogo" style="width:200px;height:200px;">
+<p align="center">
+   <img width="200px" height="200px" title="StudierLogo" alt="StudierLogo" src="StudierLogo.png" >
+</p>
 
 # Studier
 
