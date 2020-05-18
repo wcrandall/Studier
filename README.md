@@ -36,7 +36,7 @@
     * open the terminal 
     * create a virtual environment with `python -m venv venv_name`(optional)
     * run `pip install -r requirements.txt`
-    * run `python main.py
+    * run `python main.py`
     * if virtual environment was created, deactivate it with `deactivate`
 * Option 2 
     * run the .exe file
