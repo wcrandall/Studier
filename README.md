@@ -1,21 +1,18 @@
 <img src="StudierLogo.png" title="StudierLogo" alt="StudierLogo">
 
-<!-- [![StudierLogo](StudierLogo.png)] -->
-
-***INSERT GRAPHIC HERE (include hyperlink in image)***
-
 # Studier
 
 > A user enters categories, puts terms in those categories, than will be quizzed on them in a flashcard format. 
 
-* Version 1.0.0
+* Versions 
+    * 1.0.0
 * Dependences 
     * PyQt5
 
 
 
 
-[![Studier home screen](HomeScreen.png)]()
+<img src="StudierHomeScreen.png" title="StudierHomeScreen" alt="StudierHomeScreen">
 
 
 
