@@ -43,7 +43,7 @@
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/wcrandall/Studier`
+- Clone this repo to your local machine using `https://github.com/wcrandall/Studier.git`
 
 ## Contributors
 * <a href="https://github.com/wcrandall"> Wyatt Crandall </a>
