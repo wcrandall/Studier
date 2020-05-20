@@ -37,6 +37,7 @@
     * go into the directory the project is in
     * open the terminal 
     * create a virtual environment with `python -m venv venv_name`(optional)
+    * After the environment is created activate it with ./venv_name/Scripts/Activate.ps1
     * run `pip install -r requirements.txt`
     * run `python main.py`
     * if virtual environment was created, deactivate it with `deactivate`
