@@ -21,7 +21,7 @@ class EditAndAddTermsView(QDialog):
         super(EditAndAddTermsView, self).__init__()
 
         # taking out Question mark button by x button
-        self.setWindowFlags(self.windowFlags() & Qt.WindowContextHelpButtonHint)
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint)
 
         uic.loadUi(self.ui_path, self)
 
