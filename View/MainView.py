@@ -85,6 +85,7 @@ class MainView(QMainWindow):
             edit_and_add_terms.exec_()
 
             # update terms in view so new ones and edited ones are shown properly
+
             self.term_categories_list_widget_item_changed()
         except Exception as e:
             print(str(e))
@@ -149,7 +150,8 @@ class MainView(QMainWindow):
                     self.TermTableView.setModel(terms_names_and_ids_in_category)
                     # hiding term ids in the term table view
                     self.TermTableView.setColumnHidden(0, True)
-
+            else:
+                self.TermTableView.setModel(self.controller.get_empty_term_table_view_model())
 
         except Exception as e:
             print(str(e))
