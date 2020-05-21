@@ -33,16 +33,18 @@
 
 * Option 1 
     * Clone, download, or pull this repo. 
-    * if downloaded/cloned, export the zip file.
-    * go into the directory the project is in
-    * open the terminal 
-    * create a virtual environment with `python -m venv venv_name`(optional)
+    * If downloaded/cloned, export the zip file.
+    * Go into the directory the project is in
+    * Open the terminal 
+    * Create a virtual environment with `python -m venv venv_name`(optional)
     * After the environment is created activate it with ./venv_name/Scripts/Activate.ps1
-    * run `pip install -r requirements.txt`
-    * run `python main.py`
-    * if virtual environment was created, deactivate it with `deactivate`
+    * Run `pip install -r requirements.txt`
+    * Run `python main.py`
+    * If virtual environment was created, deactivate it with `deactivate`
 * Option 2 
-    * run the .exe file
+    * Run the .exe file found under the releases tab on Github
+    * Pick a folder to install the application into 
+    * After the install has finished, find the .exe file in the Studier folder and open it
 
 ### Clone
 
