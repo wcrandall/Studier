@@ -1,9 +1,9 @@
 import sqlite3
 import os.path
-
+import sys
 
 class DatabaseAccess:
-    database_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "studier.db")
+    database_path = os.path.join(getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__))), "studier.db")
     conn = None
     c = None
 
