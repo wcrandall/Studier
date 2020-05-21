@@ -40,7 +40,7 @@
     * After the environment is created activate it with ./venv_name/Scripts/Activate.ps1
     * Run `pip install -r requirements.txt`
     * Run `python main.py`
-    * If virtual environment was created, deactivate it with `deactivate`
+    * If virtual environment was created, deactivate it with `deactivate` when finished
 * Option 2 
     * Run the .exe file found under the releases tab on Github
     * Pick a folder to install the application into 
