@@ -39,7 +39,7 @@
     * Create a virtual environment with `python -m venv venv_name`(optional)
     * After the environment is created activate it with ./venv_name/Scripts/Activate.ps1
     * Run `pip install -r requirements.txt`
-    * Run `python main.py`
+    * Run `python Main.py`
     * If virtual environment was created, deactivate it with `deactivate` when finished
 * Option 2 
     * Run the .exe file found under the releases tab on Github
