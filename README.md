@@ -4,7 +4,7 @@
 
 # Studier
 
-> A user enters categories, puts terms in those categories, than will be quizzed on them in a flashcard format. 
+> A user enters categories, puts terms in those categories than will be quizzed on them in a flashcard format. 
 
 * Versions 
     * 1.0.0
